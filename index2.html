@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceramic Wash Basins</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="index.css"/>
+
+</head>
+<body>
+
+
+    <main class="container">
+        <section id="products">
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="search">Search Products</label>
+                    <input type="text" id="search" placeholder="Enter product name...">
+                </div>
+                <div class="filter-group">
+                    <label for="productId">Filter by Product ID</label>
+                    <select id="productId">
+                        <option value="">All Products</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="priceRange">Price Range</label>
+                    <div class="price-range">
+                        <input type="number" id="minPrice" placeholder="Min price">
+                        <span>to</span>
+                        <input type="number" id="maxPrice" placeholder="Max price">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <button id="resetFilters" class="btn">Reset Filters</button>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here dynamically -->
+            </div>
+        </section>
+
+        <section class="product-details" id="productDetails">
+            <div class="container">
+                <a href="#products" class="btn" id="backToProducts">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </a>
+            
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Sample product data (in a real app, this would come from an API)
+        const products = [
+            {
+                id: "CW-2023-001",
+                title: "Ceramic Wash Basin A",
+                price: 3499,
+                description: "Our premium ceramic wash basin combines elegance with durability. Made from high-quality ceramic material, this basin is resistant to stains and scratches while maintaining its glossy finish for years.",
+                features: [
+                    "Premium ceramic construction",
+                    "Stain and scratch resistant",
+                    "Easy to clean surface",
+                    "Modern minimalist design",
+                    "Available in 3 color options",
+                    "5-year manufacturer warranty"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752229-250ed79470f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                id: "CW-2023-002",
+                title: "Ceramic Wash Basin B",
+                price: 4299,
+                description: "A larger version of our popular ceramic wash basin with enhanced water flow design. The ergonomic shape reduces splashing while providing ample space.",
+                features: [
+                    "Extra-large size (24-inch width)",
+                    "Optimized water flow design",
+                    "Anti-splash rim",
+                    "Reinforced ceramic construction",
+                    "Available in 4 color options",
+                    "7-year manufacturer warranty"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752229-250ed79470f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600607688969-a5bfcd646554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                id: "CW-2023-003",
+                title: "Ceramic Wash Basin C",
+                price: 2799,
+                description: "Our budget-friendly ceramic wash basin doesn't compromise on quality. Perfect for small spaces and guest bathrooms.",
+                features: [
+                    "Compact size (16-inch width)",
+                    "Lightweight yet durable",
+                    "Easy installation",
+                    "Classic round design",
+                    "Available in 2 color options",
+                    "3-year manufacturer warranty"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1600566752229-250ed79470f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                id: "CW-2023-004",
+                title: "Ceramic Wash Basin D",
+                price: 3899,
+                description: "Modern rectangular design with integrated soap dish. The perfect combination of form and function for contemporary bathrooms.",
+                features: [
+                    "Rectangular design with rounded corners",
+                    "Integrated soap dish",
+                    "Extra-thick ceramic construction",
+                    "Low-profile design",
+                    "Available in 5 color options",
+                    "6-year manufacturer warranty"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1600607688969-a5bfcd646554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752229-250ed79470f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                id: "CW-2023-005",
+                title: "Ceramic Wash Basin E",
+                price: 4999,
+                description: "Our premium designer series wash basin with handcrafted details. Each piece is unique with subtle variations that add character.",
+                features: [
+                    "Handcrafted ceramic",
+                    "Artisan details",
+                    "Extra-deep bowl",
+                    "Custom color options available",
+                    "Limited edition",
+                    "10-year manufacturer warranty"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752229-250ed79470f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600607688969-a5bfcd646554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            }
+        ];
+
+        // Generate more products to reach 100
+        for (let i = 6; i <= 100; i++) {
+            const baseProduct = products[i % 5]; // Cycle through the first 5 products as templates
+            products.push({
+                id: `CW-2023-${i.toString().padStart(3, '0')}`,
+                title: `Ceramic Wash Basin ${String.fromCharCode(64 + i)}`,
+                price: baseProduct.price + (Math.floor(Math.random() * 1000) - 500), // Randomize price ±500
+                description: baseProduct.description,
+                features: [...baseProduct.features],
+                images: [...baseProduct.images]
+            });
+        }
+
+        // DOM elements
+        const productsGrid = document.getElementById('productsGrid');
+        const productDetails = document.getElementById('productDetails');
+        const backToProducts = document.getElementById('backToProducts');
+        const searchInput = document.getElementById('search');
+        const productIdFilter = document.getElementById('productId');
+        const minPriceInput = document.getElementById('minPrice');
+        const maxPriceInput = document.getElementById('maxPrice');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+
+        // Details page elements
+        const mainImage = document.getElementById('mainImage');
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+        const detailProductTitle = document.getElementById('detailProductTitle');
+        const detailProductId = document.getElementById('detailProductId');
+        const detailProductPrice = document.getElementById('detailProductPrice');
+        const detailProductDesc = document.getElementById('detailProductDesc');
+        const detailProductFeatures = document.getElementById('detailProductFeatures');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            populateProductIdFilter();
+            setupEventListeners();
+        });
+
+        // Render products to the grid
+        function renderProducts(productsToRender) {
+            productsGrid.innerHTML = '';
+
+            if (productsToRender.length === 0) {
+                productsGrid.innerHTML = '<div class="no-results">No products match your filters. Please try different criteria.</div>';
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.images[0]}" alt="${product.title}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-id">Product ID: ${product.id}</div>
+                        <div class="product-price">₹${product.price.toLocaleString()}</div>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-actions">
+                            <button class="btn view-details" data-product-id="${product.id}">View Details</button>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+
+            // Add event listeners to view details buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', () => viewProductDetails(button.dataset.productId));
+            });
+        }
+
+        // Populate the product ID filter dropdown
+        function populateProductIdFilter() {
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.id;
+                option.textContent = product.id;
+                productIdFilter.appendChild(option);
+            });
+        }
+
+        // View product details
+        function viewProductDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Update details page
+            mainImage.src = product.images[0];
+            mainImage.alt = product.title;
+            
+            // Clear and repopulate thumbnails
+            thumbnailContainer.innerHTML = '';
+            product.images.forEach((image, index) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = image;
+                thumbnail.alt = `Thumbnail ${index + 1}`;
+                thumbnail.className = 'thumbnail';
+                thumbnail.addEventListener('click', () => {
+                    mainImage.src = image;
+                });
+                thumbnailContainer.appendChild(thumbnail);
+            });
+
+            detailProductTitle.textContent = product.title;
+            detailProductId.textContent = `Product ID: ${product.id}`;
+            detailProductPrice.textContent = `₹${product.price.toLocaleString()}`;
+            detailProductDesc.textContent = product.description;
+
+            // Clear and repopulate features
+            detailProductFeatures.innerHTML = '';
+            product.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                detailProductFeatures.appendChild(li);
+            });
+
+            // Show details and hide grid
+            document.getElementById('products').style.display = 'none';
+            productDetails.style.display = 'block';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Back to products
+        backToProducts.addEventListener('click', () => {
+            productDetails.style.display = 'none';
+            document.getElementById('products').style.display = 'block';
+        });
+
+        // Filter products based on criteria
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedProductId = productIdFilter.value;
+            const minPrice = minPriceInput.value ? parseInt(minPriceInput.value) : 0;
+            const maxPrice = maxPriceInput.value ? parseInt(maxPriceInput.value) : Infinity;
+
+            const filtered = products.filter(product => {
+                // Search term filter
+                const matchesSearch = product.title.toLowerCase().includes(searchTerm) || 
+                                      product.description.toLowerCase().includes(searchTerm);
+
+                // Product ID filter
+                const matchesId = selectedProductId ? product.id === selectedProductId : true;
+
+                // Price range filter
+                const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+                return matchesSearch && matchesId && matchesPrice;
+            });
+
+            renderProducts(filtered);
+        }
+
+        // Reset all filters
+        function resetFilters() {
+            searchInput.value = '';
+            productIdFilter.value = '';
+            minPriceInput.value = '';
+            maxPriceInput.value = '';
+            filterProducts();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            searchInput.addEventListener('input', filterProducts);
+            productIdFilter.addEventListener('change', filterProducts);
+            minPriceInput.addEventListener('input', filterProducts);
+            maxPriceInput.addEventListener('input', filterProducts);
+            resetFiltersBtn.addEventListener('click', resetFilters);
+        }
+
+        // Change main image when thumbnail is clicked
+        function changeImage(src) {
+            mainImage.src = src;
+        }
+    </script>
+</body>
+</html>

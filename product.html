@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bathware Solutions - Premium Sanitaryware</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="../index.html" class="logo">
+                    <img src="./assets/logo.png" alt="Bathware Solutions Logo">
+                </a>
+                <div class="company-name">Lokesh Namah Group</div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#about">About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Our Story</a></li>
+                            <li><a href="#">Our Mission</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Sustainability</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#products">Products <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/product.html" >Wash Basins</a></li>
+                            <li><a href="#">Toilets</a></li>
+                            <li><a href="#">Bathtubs</a></li>
+                            <li><a href="#">Shower Solutions</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+
+    <!-- Products Section -->
+<section class="products-container">
+    <main class="container">
+        <section id="products">
+
+
+            <button class="filter-button" onclick="toggleFilter()">
+                <i class="fas fa-filter"></i>
+                <span>&nbsp Filters</span></button>
+            </button>
+
+
+
+
+            <div class="filters" id="filterSection">
+                <div class="filter-group">
+                    <label for="search">Search Paroducts</label>
+                    <input type="text" id="search" placeholder="Enter product name...">
+                </div>
+                <div class="filter-group">
+                    <label for="productId">Filter by Product ID</label>
+                    <select id="productId">
+                        <option value="">All Products</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="priceRange">Price Range</label>
+                    <div class="price-range">
+                        <input type="number" id="minPrice" placeholder="Min price">
+                        <span>to</span>
+                        <input type="number" id="maxPrice" placeholder="Max price">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <button id="resetFilters" class="btn">Reset</button>
+                    <button id="" class="btn" onclick="toggleFilter()">Search</button>
+                </div>
+            
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here dynamically -->
+            </div>
+        </section>
+
+        <section class="product-details" id="productDetails">
+            <div class="container">
+                <a href="#products" class="btn" id="backToProducts">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </a>
+            
+            </div>
+        </section>
+    </main>
+
+</section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>Bathware Solutions is a leading manufacturer of premium sanitaryware committed to delivering innovative and sustainable bathroom solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="wash-basins-link">Wash Basins</a></li>
+                        <li><a href="#">Toilets</a></li>
+                        <li><a href="#">Bathtubs</a></li>
+                        <li><a href="#">Shower Solutions</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Industrial Area, Sector 74, Noida, India</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <p><i class="fas fa-envelope"></i> info@bathwaresolutions.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Bathware Solutions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#header" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="index.js"></script>
+    <script src="product.js"></script>
+
+</body>
+</html>
